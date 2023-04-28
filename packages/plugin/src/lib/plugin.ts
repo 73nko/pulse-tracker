@@ -13,7 +13,7 @@ class PluginRum {
   private _metrics: Record<string, Metric>;
 
   constructor(config: PluginConfig) {
-    if ((!config.id || !config.projectId || !config.urlEndpoint)) {
+    if (!config.id || !config.projectId || !config.urlEndpoint) {
       throw new Error('id, projectId and urlEndpoint are required');
     }
 
@@ -21,7 +21,7 @@ class PluginRum {
     this._metrics = {};
   }
 
-public get configuration() {
+  public get configuration() {
     return this._config;
   }
 
