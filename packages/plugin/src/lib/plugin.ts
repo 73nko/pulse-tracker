@@ -36,16 +36,28 @@ class PluginRum {
     });
   }
 
-  public measureFid() {
-    onFID((metric) => this.measure(metric));
+  public measureFid(callback?: (metric: Metric) => void) {
+    if (!callback) {
+      return onFID((metric) => this.measure(metric));
+    }
+
+    onFID(callback);
   }
 
-  public measureFCP() {
-    onFCP((metric) => this.measure(metric));
+  public measureFCP(callback?: (metric: Metric) => void) {
+    if (!callback) {
+      return onFCP((metric) => this.measure(metric));
+    }
+    
+    onFCP(callback);
   }
 
-  public measureTTFB() {
-    onTTFB((metric) => this.measure(metric));
+  public measureTTFB(callback?: (metric: Metric) => void) {
+    if (!callback) {
+      return onTTFB((metric) => this.measure(metric));
+    }
+    
+    onTTFB(callback);
   }
 }
 
