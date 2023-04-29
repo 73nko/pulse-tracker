@@ -54,10 +54,24 @@ describe('plugin.config', () => {
     expect(mockPostMetric).toHaveBeenCalled();
   });
 
+  test('should call callback when measureFid is called with callback parameter', () => {
+    const mockCallback = jest.fn();
+    instancePlugin.measureFid(mockCallback);
+
+    expect(mockCallback).toHaveBeenCalled();
+  });
+
   test('should call postMetric when measureFCP is called', () => {
     instancePlugin.measureFCP();
 
     expect(mockOnFCP).toHaveBeenCalled();
     expect(mockPostMetric).toHaveBeenCalled();
+  });
+
+  test('should call callback when measureFCP is called with callback parameter', () => {
+    const mockCallback = jest.fn();
+    instancePlugin.measureFCP(mockCallback);
+
+    expect(mockCallback).toHaveBeenCalled();
   });
 });
