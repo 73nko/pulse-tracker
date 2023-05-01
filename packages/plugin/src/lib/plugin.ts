@@ -6,7 +6,6 @@ import { PluginConfig } from './global';
 
 class PluginRum {
   private _config: PluginConfig;
-  private _metrics: Record<string, Metric>;
 
   constructor(config: PluginConfig) {
     if (!config.id || !config.projectId || !config.urlEndpoint) {
@@ -14,7 +13,6 @@ class PluginRum {
     }
 
     this._config = config;
-    this._metrics = {};
   }
 
   public get configuration() {
@@ -22,8 +20,6 @@ class PluginRum {
   }
 
   private measure(metric: Metric) {
-    this._metrics[metric.name] = metric;
-
     const { projectId, urlEndpoint } = this._config;
 
     postMetric(urlEndpoint, {
