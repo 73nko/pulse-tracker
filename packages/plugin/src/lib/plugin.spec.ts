@@ -7,7 +7,8 @@ const mockOnFID = jest.fn().mockImplementation((cb) => cb(mockMetricFID));
 const mockOnFCP = jest.fn().mockImplementation((cb) => cb(mockMetricFCP));
 const mockOnTTFB = jest.fn().mockImplementation((cb) => cb(mockMetricTTFB));
 
-import { plugin, PluginConfig } from './plugin';
+import { plugin } from './plugin';
+import { PluginConfig } from './global';
 
 jest.mock('./api', () => ({
   postMetric: mockPostMetric,

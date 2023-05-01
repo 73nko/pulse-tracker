@@ -1,12 +1,8 @@
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { onFID, onTTFB, onFCP, Metric } from 'web-vitals';
 import { postMetric } from './api';
+import { PluginConfig } from './global';
 
-export interface PluginConfig {
-  id: string;
-  projectId: string;
-  urlEndpoint: string;
-}
 
 class PluginRum {
   private _config: PluginConfig;

@@ -1,6 +1,7 @@
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { ProjectMetric } from '../types';
-import { api, ResponseError } from './api';
+import { ProjectMetric } from '../global';
+import { api } from './api';
+import { ResponseError } from '../../utils/error';
 
 export async function postMetric(url: string, data: ProjectMetric) {
   try {
