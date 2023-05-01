@@ -1,11 +1,4 @@
-export class ResponseError extends Error {
-  response: Response;
-
-  constructor(message: string, res: Response) {
-    super(message);
-    this.response = res;
-  }
-}
+import { ResponseError } from '../../utils/error';
 
 async function http<T>(path: string, config: RequestInit): Promise<T> {
   const request = new Request(path, config)
