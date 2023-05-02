@@ -11,6 +11,8 @@
         "outputPath": "dist/packages/plugin",
         "main": "packages/plugin/src/index.ts",
         "tsConfig": "packages/plugin/tsconfig.lib.json",
+        "generatePackageJson": true,
+        "buildableProjectDepsInPackageJsonType": "peerDependencies",
         "assets": ["packages/plugin/*.md"]
       }
     },
