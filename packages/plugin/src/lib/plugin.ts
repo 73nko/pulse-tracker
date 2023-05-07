@@ -12,7 +12,10 @@ class PluginRum {
       throw new Error('projectId and projectName are required');
     }
 
-    this._config = config;
+    this._config = {
+      ...config,
+      urlEndpoint: config?.urlEndpoint ?? SERVER_URL,
+    }
   }
 
   public get configuration() {
@@ -20,9 +23,9 @@ class PluginRum {
   }
 
   private measure(metric: Metric, callback?: (metric: Metric) => void) {
-    const { projectId, urlEndpoint = SERVER_URL } = this._config;
+    const { projectId, urlEndpoint } = this._config;
 
-    postMetric(urlEndpoint, {
+    postMetric(urlEndpoint as string, {
       projectId: projectId,
       ...metric,
     });
