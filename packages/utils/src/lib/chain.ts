@@ -92,7 +92,7 @@ export const chain = (chainName = '') => {
   };
 
   const instance = async ({ metric }: { metric: any }) => {
-    // Process records from same group id sequentially but from different group id in parallel
+    // Process metrics from same id in sequence
     const processStep = async () => {
       const failedRecords: any = [];
 

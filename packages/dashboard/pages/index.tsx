@@ -13,7 +13,7 @@ export function Index() {
       projectName: 'Mi web',
     });
 
-    rum.measureFCP((fcp) => console.log('Mostramos el fid ', fcp));
+    rum.measureFCP((fcp) => console.log('Mostramos el fcp -->', fcp));
   }
   const title = 'Page tittle';
   return (
