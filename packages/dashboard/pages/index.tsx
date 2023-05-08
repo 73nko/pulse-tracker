@@ -1,4 +1,3 @@
-import { utils } from '@pulse-tracker/utils';
 import { plugin } from '@pulse-tracker/plugin';
 import styled from '@emotion/styled';
 
@@ -9,10 +8,14 @@ const StyledPage = styled.div`
 
 export function Index() {
   if (typeof window !== 'undefined') {
-    const rum = plugin.config({ id: "1", projectId: "miweb", urlEndpoint: "https://localhost/saveMetric" });
-    rum.measureFid((fid) => console.log("Mostramos el fid ", fid));
+    const rum = plugin.config({
+      projectId: 'miweb',
+      projectName: 'Mi web',
+    });
+
+    rum.measureFCP((fcp) => console.log('Mostramos el fid ', fcp));
   }
-  const title = utils();
+  const title = 'Page tittle';
   return (
     <StyledPage>
       <div className="wrapper">
