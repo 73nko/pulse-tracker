@@ -13,7 +13,10 @@ async function http<T>(path: string, config: RequestInit): Promise<T> {
 
 
 async function post<T, U>(path: string, body: T, config?: RequestInit): Promise<U> {
-  const init = {method: 'post', body: JSON.stringify(body), ...config}
+  const init = {method: 'post', body: JSON.stringify(body), headers: {
+    'Content-Type': 'application/json'
+  }, 
+  ...config}
   return await http<U>(path, init)
 }
 

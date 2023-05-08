@@ -22,8 +22,8 @@ jest.mock('web-vitals', () => ({
 
 describe('plugin.config', () => {
   const mockConfig = {
-    id: 'mi-id',
     projectId: 'mi-project-id',
+    projectName: 'mi-project-name',
     urlEndpoint: 'https://mi-url.com/metric',
   };
 
@@ -44,20 +44,20 @@ describe('plugin.config', () => {
     };
 
     expect(() => plugin.config(mockConfig as PluginConfig)).toThrowError(
-      'id, projectId and urlEndpoint are required'
+      'projectId and projectName are required'
     );
   });
 
-  test('should call postMetric when measureFid is called', () => {
-    instancePlugin.measureFid();
+  test('should call postMetric when measureFID is called', () => {
+    instancePlugin.measureFID();
 
     expect(mockOnFID).toHaveBeenCalled();
     expect(mockPostMetric).toHaveBeenCalled();
   });
 
-  test('should call callback when measureFid is called with callback parameter', () => {
+  test('should call callback when measureFID is called with callback parameter', () => {
     const mockCallback = jest.fn();
-    instancePlugin.measureFid(mockCallback);
+    instancePlugin.measureFID(mockCallback);
 
     expect(mockCallback).toHaveBeenCalled();
   });

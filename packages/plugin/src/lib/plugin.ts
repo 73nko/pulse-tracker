@@ -2,54 +2,55 @@
 import { onFID, onTTFB, onFCP, Metric } from 'web-vitals';
 import { postMetric } from './api';
 import { PluginConfig } from './global';
-
+import { SERVER_URL } from '../utils/constants';
 
 class PluginRum {
   private _config: PluginConfig;
 
   constructor(config: PluginConfig) {
-    if (!config.id || !config.projectId || !config.urlEndpoint) {
-      throw new Error('id, projectId and urlEndpoint are required');
+    if (!config.projectId || !config.projectName) {
+      throw new Error('projectId and projectName are required');
     }
 
-    this._config = config;
+    this._config = {
+      ...config,
+      urlEndpoint: config?.urlEndpoint ?? SERVER_URL,
+    }
   }
 
   public get configuration() {
     return this._config;
   }
 
-  private measure(metric: Metric) {
+  private measure(metric: Metric, callback?: (metric: Metric) => void) {
     const { projectId, urlEndpoint } = this._config;
 
-    postMetric(urlEndpoint, {
+    postMetric(urlEndpoint as string, {
       projectId: projectId,
       ...metric,
     });
+
+    if (callback) {
+      callback(metric);
+    }
   }
 
-  public measureFid(callback?: (metric: Metric) => void) {
-    if (!callback) {
-      return onFID((metric) => this.measure(metric));
-    }
-
-    onFID(callback);
+  public measureFID(callback?: (metric: Metric) => void) {
+    onFID((metric) => {
+      this.measure(metric, callback);
+    });
   }
 
   public measureFCP(callback?: (metric: Metric) => void) {
-    if (!callback) {
-      return onFCP((metric) => this.measure(metric));
-    }
-    
-    onFCP(callback);
+    onFCP((metric) => {
+      this.measure(metric, callback);
+    });
   }
 
   public measureTTFB(callback?: (metric: Metric) => void) {
-    if (!callback) {
-      return onTTFB((metric) => this.measure(metric));
-    }
-    
-    onTTFB(callback);
+    onTTFB((metric) => {
+      this.measure(metric, callback);
+    });
   }
 }
 

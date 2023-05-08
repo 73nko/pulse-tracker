@@ -6,7 +6,7 @@ export interface ProjectMetric extends Metric {
 }
 
 export interface PluginConfig {
-  id: string;
   projectId: string;
-  urlEndpoint: string;
+  projectName: string;
+  urlEndpoint?: string;
 }
