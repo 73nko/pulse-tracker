@@ -15,7 +15,10 @@ app.post('/save-metric', async (req, res) => {
 
   try {
     console.log('save-metric', name, metric);
-    const result = await chains[name]({ metric });
+
+    const result = await chains[name]?.({ metric });
+    if (!result) throw new Error('Metric not allowed');
+
     res.json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
